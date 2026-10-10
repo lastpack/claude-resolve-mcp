@@ -23,6 +23,9 @@
 - **Fusion comps changed via the API don't render until the change goes through the undo system.**
   `activate(comp)` = StartUndo + add/delete a node + EndUndo(true). Called automatically in `fx_end`;
   call `activate_all(from, to)` before rendering. No clicking in the Fusion page needed.
+- `activate()` must not add image tools: a Background added while the comp is open in the Fusion page gets
+  auto-merged into the chain; after deleting it a dangling Merge stays, and several of them hang the render.
+  It uses an Underlay now; `activate_all` also removes such Merges (`fix_orphan_merges`). Test: `tools/bugtest_render.py --ui`.
 - `AppendToTimeline`: `endFrame` is exclusive (length = endFrame - startFrame).
 - After a Resolve restart the bridge is dead but `queue/alive` still says "running" — requests hang; restart the bridge.
 - **Computer use: don't call open_application("DaVinci Resolve")** — the resolver may pick the wrong shortcut

@@ -103,11 +103,35 @@ end
 
 -- Композиции, изменённые через API, Resolve не рендерит, пока правка не пройдёт через систему undo
 -- (как правка в UI). Пустое отменяемое действие «активирует» композицию.
+-- The node is an Underlay (graph backdrop, no inputs/outputs). It used to be a Background, but when the comp was
+-- open in the Fusion page, Fusion auto-connected the Background to the selected node through a Merge; the
+-- Background got deleted, the Merge with a dangling Foreground stayed in the chain, and several of those hung
+-- the render (reproduced: 4 effects on one clip -> render stuck at 43%).
 function activate(comp)
   comp:StartUndo('activate')
-  local d = comp:AddTool('Background', -32768, -32768)
-  d:Delete()
+  local d = comp:AddTool('Underlay', -32768, -32768)
+  if d then d:Delete() end
   comp:EndUndo(true)
+end
+
+-- Remove dangling Merges (Foreground not connected) left by the old activation: the next node is reconnected
+-- to the Background source. Returns the number removed.
+function fix_orphan_merges(comp)
+  local n = 0
+  for _, t in pairs(comp:GetToolList(false, 'Merge') or {}) do
+    if type(t) ~= 'number' then
+      local fg = t:FindMainInput(2)
+      local bgout = t:FindMainInput(1) and t:FindMainInput(1):GetConnectedOutput()
+      if fg and not fg:GetConnectedOutput() and bgout then
+        for _, inp in pairs(t:FindMainOutput(1):GetConnectedInputs() or {}) do
+          if type(inp) ~= 'number' then inp:ConnectTo(bgout) end
+        end
+        t:Delete()
+        n = n + 1
+      end
+    end
+  end
+  return n
 end
 
 function activate_all(from, to)
@@ -116,7 +140,9 @@ function activate_all(from, to)
   for tr = 1, tl:GetTrackCount('video') do
     for _, it in ipairs(items('video', tr)) do
       if it:GetEnd() > (from or -1) and it:GetStart() < (to or 1e12) and it:GetFusionCompCount() > 0 then
-        activate(it:GetFusionCompByIndex(1)); n = n + 1
+        local comp = it:GetFusionCompByIndex(1)
+        fix_orphan_merges(comp)
+        activate(comp); n = n + 1
       end
     end
   end
