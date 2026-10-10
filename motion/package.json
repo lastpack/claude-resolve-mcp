@@ -1,0 +1,21 @@
+{
+  "name": "claude-resolve-mcp-motion",
+  "private": true,
+  "description": "Remotion overlays (kinetic text, graphics) rendered with alpha for DaVinci Resolve",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "still": "remotion still src/index.ts KineticText out/still.png --frame=240 --image-format=png",
+    "render:alpha": "remotion render src/index.ts KineticText out/overlay.mov --codec=prores --prores-profile=4444 --pixel-format=yuva444p10le --image-format=png"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.533",
+    "@remotion/google-fonts": "4.0.533",
+    "@remotion/renderer": "4.0.533",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "4.0.533"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  }
+}

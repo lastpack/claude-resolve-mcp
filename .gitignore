@@ -1,0 +1,30 @@
+.venv/
+__pycache__/
+*.pyc
+uv.lock
+.mcp.json
+bridge/start.lua
+
+# рабочие папки
+queue/
+work/
+renders/
+previews/
+refs/
+
+# Remotion
+motion/node_modules/
+motion/out/
+motion/.agents/
+motion/.claude/
+motion/skills-lock.json
+
+# медиа (исходники и рендеры в репозиторий не кладём)
+*.mp4
+*.mov
+*.wav
+*.mp3
+*.png
+*.jpg
+!docs/*.png
+!docs/*.jpg

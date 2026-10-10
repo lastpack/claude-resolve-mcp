@@ -1,0 +1,8 @@
+{
+  "words": [
+    { "text": "edit", "in": 30, "out": 300, "x": 0.08, "y": 0.45, "size": 120 },
+    { "text": "with", "in": 60, "out": 300, "x": 0.08, "y": 0.60, "size": 120 },
+    { "text": "claude", "in": 90, "out": 300, "x": 0.08, "y": 0.80, "size": 200, "shake": true },
+    { "text": "in davinci resolve", "in": 360, "out": 600, "x": 0.08, "y": 0.80, "size": 110 }
+  ]
+}
