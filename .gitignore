@@ -28,3 +28,5 @@ motion/skills-lock.json
 *.jpg
 !docs/*.png
 !docs/*.jpg
+!docs/*.mp4
+!docs/*.gif

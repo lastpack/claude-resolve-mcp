@@ -8,6 +8,11 @@ renders, and checks its own result.
 
 > Not affiliated with Blackmagic Design or Anthropic. Tested on **DaVinci Resolve 21.1 Free, Windows 11**.
 
+<p align="center">
+  <a href="docs/promo_en.mp4"><img src="docs/promo_en.gif" width="300" alt="claude-resolve-mcp promo: Claude builds a timeline, tweaks the inspector and adds Fusion effects in DaVinci Resolve"></a><br>
+  <sub>▶ <a href="docs/promo_en.mp4">Watch the full promo with sound (19 s)</a> — made with this kit: the DaVinci footage is a real screen recording of Claude working through the bridge, motion graphics in Remotion.</sub>
+</p>
+
 ---
 
 ## Why
@@ -108,6 +113,11 @@ its source must stay open under the same license. Dependencies (Remotion, Whispe
 ## Русский
 
 **Монтаж в DaVinci Resolve вместе с Claude, в том числе в бесплатной версии.**
+
+<p align="center">
+  <a href="docs/promo_ru.mp4"><img src="docs/promo_ru.gif" width="300" alt="Промо claude-resolve-mcp: Claude собирает таймлайн, крутит инспектор и добавляет Fusion-эффекты в DaVinci Resolve"></a><br>
+  <sub>▶ <a href="docs/promo_ru.mp4">Смотреть промо целиком со звуком (19 с)</a> — сделано этим же набором: DaVinci — настоящая запись экрана, где Claude работает через мост, графика — Remotion.</sub>
+</p>
 
 Бесплатный Resolve не пускает внешние скрипты, а в 21.1 из него убрали и Python-консоль, поэтому MCP-серверы
 на Python к Resolve 21.1 Free не подключаются. Здесь мост на **Lua** запускается внутри Resolve (из Lua-консоли),
